@@ -2,7 +2,7 @@
 
 from subprocess import check_output
 from sys import platform
-import pprint
+
 # Step Group 1: Safety checks
 print("Performing OS and safety checks...")
 
@@ -24,12 +24,8 @@ for line in dflines:
     for item in boot_devices:
         if item in line:
           boot_device = line.split()[0]
-          print(boot_device)
+          print("Boot device Check: PASS (%s)" % (boot_device))
         else:
           pass
-"""
-pprint.pprint(dflines)
-print(type(dflines))
-"""
 
 
