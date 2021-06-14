@@ -32,4 +32,14 @@ for line in dflines:
         else:
           pass
 
+# Safety checks complete
+print("Initiating Vulcan...")
+# Step Group 2: dd function and shell maybe?
+# Step 2.1: List all available drives
+
+supported_proto = ["sda", "nvme"]
+
+
+
+
 
