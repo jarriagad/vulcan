@@ -12,4 +12,9 @@ Options / Features: (Initial stage)
 - Format multiple drives at the same time.
 - Hotswap drives once they are completed without stoping process.
 
+Dependencies:
+- Writen in python 3.8.5
+- dd
+- A Linux system
+
 
