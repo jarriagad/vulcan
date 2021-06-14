@@ -24,7 +24,10 @@ for line in dflines:
     for item in boot_devices:
         if item in line:
           boot_partition = line.split()[0]
-          boot_device = boot_partition[:-1]
+          if item == boot_devices[0]:
+            boot_device = boot_partition[:-1]
+          if item == boot_devices[1]:
+            boot_device = boot_partition[:-2]
           print("Boot device Check: PASS (%s)" % (boot_device))
         else:
           pass
