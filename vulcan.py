@@ -23,7 +23,8 @@ dflines = df.split('\n')
 for line in dflines:
     for item in boot_devices:
         if item in line:
-          boot_device = line.split()[0]
+          boot_partition = line.split()[0]
+          boot_device = boot_partition[:-1]
           print("Boot device Check: PASS (%s)" % (boot_device))
         else:
           pass
