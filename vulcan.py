@@ -2,6 +2,7 @@
 
 from subprocess import check_output
 from sys import platform
+from glob import glob
 
 # Step Group 1: Safety checks
 print("Performing OS and safety checks...")
@@ -35,11 +36,20 @@ for line in dflines:
 # Safety checks complete
 print("Initiating Vulcan...")
 # Step Group 2: dd function and shell maybe?
+
 # Step 2.1: List all available drives
+supported_proto = ["sd", "nvme"]
 
-supported_proto = ["sda", "nvme"]
+def list_devices():
+    lsblk = check_output(["lsblk", "-o", "NAME", "-nl"]).decode()
+    lb_devs = lsblk.split('\n')
+    for i in lb_devs 
+    return lsblklines
 
-
-
-
-
+print(list_devices())
+"""
+What needs to be done:
+    1. create of list of devices 
+    2. parse list and remove "boot_device"
+    3. initialize dd command 
+"""
