@@ -7,7 +7,6 @@ import pprint
 print("Performing OS and safety checks...")
 
 # Step1.1: Check for linux environment
-#TODO: Remove darwin once finished prototyping
 accepted_os = ["linux", "darwin"]
 
 if platform not in accepted_os:
@@ -17,15 +16,15 @@ else:
     print("OS Check: PASS (%s)" % (platform))
 
 # Step1.2: Check for boot device, and ban it from ever being touched
-#Only works for linux for now
-boot_devices = ["/boot", "/System/Volumes/Data"]
+boot_devices = ["/boot", "/System/Volumes/Preboot"]
 df = check_output(['df']).decode()
 dflines = df.split('\n')
 
 for line in dflines:
     for item in boot_devices:
         if item in line:
-          print(line)
+          boot_device = line.split()[0]
+          print(boot_device)
         else:
           pass
 """
