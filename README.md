@@ -17,4 +17,5 @@ Dependencies:
 - dd
 - A Linux system
 
-
+Dependencies:
+- `pip install inquirer`

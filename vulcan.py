@@ -1,55 +1,36 @@
 #!/usr/bin/env python3
 
-from subprocess import check_output
-from sys import platform
+from safety_check import safety_check
 from glob import glob
+from pprint import pprint as print
+import os
+import inquirer
 
-# Step Group 1: Safety checks
-print("Performing OS and safety checks...")
-
-# Step1.1: Check for linux environment
-accepted_os = ["linux", "darwin"]
-
-if platform not in accepted_os:
-    print("Your OS is currently not supported. Exiting...")
-    exit(99)
-else:
-    print("OS Check: PASS (%s)" % (platform))
-
-# Step1.2: Check for boot device, and ban it from ever being touched
-boot_devices = ["/boot", "/System/Volumes/Preboot"]
-df = check_output(['df']).decode()
-dflines = df.split('\n')
-
-for line in dflines:
-    for item in boot_devices:
-        if item in line:
-          boot_partition = line.split()[0]
-          if item == boot_devices[0]:
-            boot_device = boot_partition[:-1]
-          if item == boot_devices[1]:
-            boot_device = boot_partition[:-2]
-          print("Boot device Check: PASS (%s)" % (boot_device))
-        else:
-          pass
-
-# Safety checks complete
-print("Initiating Vulcan...")
-# Step Group 2: dd function and shell maybe?
+# Checks for OS and Boot device, called from ./safety_check.py
+safety_check()
 
 # Step 2.1: List all available drives
 supported_proto = ["sd", "nvme"]
 
-def list_devices():
-    lsblk = check_output(["lsblk", "-o", "NAME", "-nl"]).decode()
-    lb_devs = lsblk.split('\n')
-    for i in lb_devs 
-    return lsblklines
+dev_path = "/dev"
+safe_pruned_devs = []
+for proto in supported_proto:
+    for dev in glob('%s/%s*' % (dev_path, proto)):
+        if safety_check.boot_device not in dev:
+            safe_pruned_devs.append(dev)
 
-print(list_devices())
-"""
-What needs to be done:
-    1. create of list of devices 
-    2. parse list and remove "boot_device"
-    3. initialize dd command 
-"""
+#Sets up the checkbox menu
+questions = [
+        inquirer.Checkbox('Devices',
+            message="What disks would you like to format?",
+            choices=safe_pruned_devs,
+            ),
+        ]
+
+#this spits out a dict
+answers = inquirer.prompt(questions)
+
+
+
+
+
