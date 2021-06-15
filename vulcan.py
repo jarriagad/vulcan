@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 from safety_check import safety_check
-from glob import glob
 from pprint import pprint as print
-import os
+from glob import glob
+import threading
 import inquirer
+import os
+from dd import dd
 
 # Checks for OS and Boot device, called from ./safety_check.py
 safety_check()
@@ -21,16 +23,24 @@ for proto in supported_proto:
 
 #Sets up the checkbox menu
 questions = [
-        inquirer.Checkbox('Devices',
+        inquirer.Checkbox('devices',
             message="What disks would you like to format?",
             choices=safe_pruned_devs,
             ),
+        inquirer.List('format_type',
+            message="Choose dd data type", 
+            choices=["Random (slower, more secure)", "Zero (Faster, probably)"]),
+        inquirer.Confirm('confirm',
+            message='Confirm deletion of the above drives?',
+            default=False,)
         ]
 
-#this spits out a dict
 answers = inquirer.prompt(questions)
+dd_devices = answers[devices]
+dd_data = answers[format_type]
+dd_conf = answers[confirm]
 
 
 
-
+print(answers)
 
