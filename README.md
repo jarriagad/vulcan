@@ -2,7 +2,7 @@
 
 # VULCAN
 
-## Easily destroy any number of drives currecntly connected to the host device
+## Easily destroy any number of drives connected to the host device
 
 Vulcan allows for parallel deletion of data by either replacing it with random or "0" bits. Multiple drives can be formated at the same time
 
